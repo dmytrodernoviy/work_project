@@ -38,7 +38,11 @@ const RegisterForm = props => {
     return (
         <Formik
             onSubmit={values =>
-                props.loginSubmit({ email: values.email, password: values.password })
+                props.registerSubmit({ 
+                    username: values.login,
+                    email: values.email, 
+                    password1: values.password1,
+                    password2: values.password2 })
             }
             validationSchema={validationSchema}
         >
@@ -89,7 +93,11 @@ const RegisterForm = props => {
                             labelFontSize={18}
                             onChangeText={text => props.setFieldValue("password2", text)}
                         />
-                        <View>{error && <Text>{error.non_field_errors[0]}</Text>}</View>
+                        <View>
+                            {error && error.non_field_errors && (
+                                <Text>{error.non_field_errors[0]}</Text>
+                            )}
+                        </View>
                         <RaisedTextButton
                             style={styles.button}
                             onPress={props.handleSubmit}

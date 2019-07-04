@@ -1,27 +1,47 @@
-import * as types from "../action-creators/login"
+import * as typesLogin from "../action-creators/login";
+import * as typesRegister from "../action-creators/register";
+import { INIT_APP } from "../action-creators/initApp";
 
 const initialState = {
   loading: false,
-  isLogin: false,
+  token: null,
   userData: {},
-  error: false
+  errorLogin: null,
+  errorRegister: null
 };
 
 export default function authorization(state = initialState, action) {
   switch (action.type) {
-    case "LOGIN_REQUEST":
+    case typesLogin.LOGIN_REQUEST:
       return { ...state, loading: true };
-    case "LOGIN_SUCCESS":
+    case typesLogin.LOGIN_SUCCESS:
       return {
         ...state,
+        token: action.token,
         loading: false,
         userData: action.userData,
-        error: false
+        errorLogin: null,
+        errorRegister: null
       };
-    case "LOGIN_FAILURE":
-      return { ...state, loading: false, error: action.error };
-    case types.RESET_LOGIN_ERROR:
-      return { ...state, error: null };
+    case typesLogin.LOGIN_FAILURE:
+      return { ...state, loading: false, errorLogin: action.error };
+    case typesRegister.REGISTER_REQUEST:
+      return { ...state, loading: true };
+    case typesRegister.REGISTER_SUCCESS:
+      return {
+        ...state,
+        token: action.token,
+        loading: false,
+        userData: action.userData,
+        errorLogin: null,
+        errorRegister: null
+      };
+    case typesRegister.REGISTER_ERROR:
+      return { ...state, loading: false, errorRegister: action.error };
+    case INIT_APP:
+        return { ...state, token: action.token };
+    case typesLogin.RESET_LOGIN_ERROR:
+      return { ...state, errorLogin: null, errorRegister: null };
     default:
       return state;
   }

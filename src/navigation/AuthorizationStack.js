@@ -1,16 +1,17 @@
-import { Easing, Animated } from "react-native";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import LoginScreen from "../screens/Login";
 import Register from "../screens/Register";
+import transition from "./transition-config";
 
-const MainStack = createStackNavigator(
+const AuthorizationStack = createStackNavigator(
   {
     LoginScreen: { screen: LoginScreen },
     Register: { screen: Register }
   },
   {
-    headerMode: "none"
+    headerMode: "none",
+    transitionConfig: transition
   }
 );
 
-export default createAppContainer(MainStack);
+export default createAppContainer(AuthorizationStack);

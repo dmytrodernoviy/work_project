@@ -29,6 +29,10 @@ const validationSchema = Yup.object().shape({
 
 const LoginForm = props => {
   const { error } = props;
+  const onChangeText = (propsFormik, fieldType, text) => {
+    propsFormik.setFieldValue(fieldType, text);
+  };
+
   return (
     <Formik
       onSubmit={values =>
@@ -48,7 +52,7 @@ const LoginForm = props => {
               tintColor="white"
               fontSize={22}
               labelFontSize={18}
-              onChangeText={text => props.setFieldValue("email", text)}
+              onChangeText={text => onChangeText(props, "email", text)}
             />
             <FormikInput
               label="Password"
@@ -59,9 +63,13 @@ const LoginForm = props => {
               tintColor="white"
               fontSize={22}
               labelFontSize={18}
-              onChangeText={text => props.setFieldValue("password", text)}
+              onChangeText={text => onChangeText(props, "password", text)}
             />
-            <View>{error && <Text>{error.non_field_errors[0]}</Text>}</View>
+            <View>
+              {error && error.non_field_errors && (
+                <Text>{error.non_field_errors[0]}</Text>
+              )}
+            </View>
             <RaisedTextButton
               style={styles.button}
               onPress={props.handleSubmit}
@@ -79,7 +87,7 @@ const LoginForm = props => {
 
 const styles = StyleSheet.create({
   form: {
-    width: width * 0.85,
+    width: width * 0.85
   },
   button: {
     marginTop: height * 0.05

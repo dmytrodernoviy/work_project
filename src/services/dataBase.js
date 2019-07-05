@@ -8,6 +8,15 @@ export const setTokenToDB = async token => {
   } catch (error) {};
 };
 
+export const setUserDataToDB = async userData => {
+  try {
+    const UserData = 
+    await AsyncStorage.setItem
+  } catch (error) {
+    
+  }
+}
+
 export const getTokenFromDB = async () => {
   try {
     const token = await AsyncStorage.getItem(TOKEN);

@@ -39,7 +39,9 @@ export default function authorization(state = initialState, action) {
     case typesRegister.REGISTER_ERROR:
       return { ...state, loading: false, errorRegister: action.error };
     case INIT_APP:
-        return { ...state, token: action.token };
+      return { ...state, token: action.token };
+    case typesLogin.LOGOUT:
+      return { ...state, token: null };
     case typesLogin.RESET_LOGIN_ERROR:
       return { ...state, errorLogin: null, errorRegister: null };
     default:

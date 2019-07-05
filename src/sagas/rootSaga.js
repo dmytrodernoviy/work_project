@@ -2,7 +2,13 @@ import { all } from "redux-saga/effects";
 import { watchLogin } from "./login";
 import { watchRegister } from "./register";
 import { watchInitApp } from "./initApp";
+import { watchProductsList } from "./productsList";
 
 export default function* rootSaga() {
-  yield all([watchLogin(), watchRegister(), watchInitApp()]);
+  yield all([
+    watchLogin(),
+    watchRegister(),
+    watchInitApp(),
+    watchProductsList()
+  ]);
 }

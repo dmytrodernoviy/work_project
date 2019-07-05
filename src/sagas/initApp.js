@@ -1,17 +1,23 @@
 import { put, takeEvery, call } from "redux-saga/effects";
-import { getTokenFromDB } from "../services/dataBase";
-import initAppAction, { INIT_SAGA, init } from "../action-creators/initApp";
-import { setTokenToHeaders } from "../services/restAPI";
+import { getTokenFromDB, setUserDataToDB } from "../services/dataBase";
+import initAppAction, {
+  INIT_SAGA,
+  init,
+  getProfileAction
+} from "../action-creators/initApp";
+import { setTokenToHeaders, getProfile } from "../services/restAPI";
 
 function* initApp() {
   try {
     yield call(init);
     const token = yield call(getTokenFromDB);
-    if(token) {
+    if (token) {
       yield put(initAppAction(token));
-      setTokenToHeaders(token)
+      setTokenToHeaders(token);
+      const response = yield call(getProfile);
+      yield put(getProfileAction(response.data));
+      yield call(setUserDataToDB, response.data);
     }
-    
   } catch (error) {}
 }
 

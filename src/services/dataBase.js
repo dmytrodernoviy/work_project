@@ -5,21 +5,22 @@ const TOKEN = "token";
 export const setTokenToDB = async token => {
   try {
     await AsyncStorage.setItem(TOKEN, token);
-  } catch (error) {};
+  } catch (error) {}
 };
 
 export const setUserDataToDB = async userData => {
   try {
-    const UserData = 
-    await AsyncStorage.setItem
-  } catch (error) {
-    
-  }
-}
+    const userValues = [
+      ["username", userData.username],
+      ["email", userData.email]
+    ];
+    await AsyncStorage.multiSet(userValues);
+  } catch (error) {}
+};
 
 export const getTokenFromDB = async () => {
   try {
     const token = await AsyncStorage.getItem(TOKEN);
     return token;
-  } catch (error) {};
+  } catch (error) {}
 };

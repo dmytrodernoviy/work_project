@@ -9,7 +9,8 @@ import { logOut } from "../action-creators/login";
 
 const mapStateToProps = state => ({
   products: state.products.products,
-  loading: state.products.loading
+  loading: state.products.loading,
+  userData: state.authorization.userData
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,10 +24,10 @@ class Products extends Component {
   }
 
   render() {
-    const { products, loading } = this.props;
+    const { products, loading, userData } = this.props;
     return (
       <View>
-        <HeaderProductList logout={this.props.logout} />
+        <HeaderProductList logout={this.props.logout} userData={userData}/>
         {loading ? (
           <AactivityIndicator />
         ) : (

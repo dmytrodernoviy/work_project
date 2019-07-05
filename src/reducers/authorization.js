@@ -1,6 +1,6 @@
 import * as typesLogin from "../action-creators/login";
 import * as typesRegister from "../action-creators/register";
-import { INIT_APP } from "../action-creators/initApp";
+import { INIT_APP, GET_PROFILE } from "../action-creators/initApp";
 
 const initialState = {
   loading: false,
@@ -40,6 +40,8 @@ export default function authorization(state = initialState, action) {
       return { ...state, loading: false, errorRegister: action.error };
     case INIT_APP:
       return { ...state, token: action.token };
+    case GET_PROFILE:
+      return { ...state, userData: action.payload };
     case typesLogin.LOGOUT:
       return { ...state, token: null };
     case typesLogin.RESET_LOGIN_ERROR:

@@ -1,34 +1,33 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { height, width } from "../utilites";
 import defaultAvatar from "../assets/img/Avatar.png";
 import logoutIcon from "../assets/img/logout.png";
 import { setTokenToDB } from "../services/dataBase";
 
-const HeaderProductList = ({logout}) => {
-    const logOut = () => {
-        setTokenToDB("")
-        logout()
-    };
+const HeaderProductList = ({ logout, userData }) => {
+  const logOut = () => {
+    setTokenToDB("");
+    logout();
+  };
 
-    return(
-        <View style={styles.container}>
-            <View style={styles.wrap}>
-                <View style={styles.user}>
-                    <Image source={defaultAvatar} style={styles.avatar} />
-                    <Text style={{ color: "white" }}>User Name</Text>
-                </View>
-                <TouchableOpacity onPress={() => logOut()}>
-                    <View>
-                        <Image source={logoutIcon} style={styles.logout} />
-                    </View>
-                </TouchableOpacity>
-            </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.wrap}>
+        <View style={styles.user}>
+          <Image source={defaultAvatar} style={styles.avatar} />
+          <Text style={styles.username}>{userData.username}</Text>
         </View>
-    )
-}
+        <TouchableOpacity onPress={() => logOut()}>
+          <View>
+            <Image source={logoutIcon} style={styles.logout} />
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#34a5de",
     justifyContent: "flex-end",
     paddingBottom: height * 0.01,
-    paddingLeft: width * 0.05,
+    paddingLeft: width * 0.05
   },
   wrap: {
     flexDirection: "row",
@@ -56,6 +55,10 @@ const styles = StyleSheet.create({
   logout: {
     width: width * 0.1,
     height: height * 0.05
+  },
+  username: {
+    color: "white",
+    fontSize: 20
   }
 });
 

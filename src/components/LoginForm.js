@@ -28,8 +28,9 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginForm = props => {
-  const { error } = props;
+  const { error, resetError } = props;
   const onChangeText = (propsFormik, fieldType, text) => {
+    resetError();
     propsFormik.setFieldValue(fieldType, text);
   };
 

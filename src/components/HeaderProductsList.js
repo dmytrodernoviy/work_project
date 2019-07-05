@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     height: height * 0.12,
     backgroundColor: "#34a5de",
     justifyContent: "flex-end",
-    paddingBottom: height * 0.01,
+    paddingBottom: height * 0.015,
     paddingLeft: width * 0.05
   },
   wrap: {

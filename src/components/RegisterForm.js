@@ -34,7 +34,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterForm = props => {
-    const { error } = props;
+    const { error, resetError } = props;
+    const onChangeText = (propsFormik, fieldType, text) => {
+        resetError();
+        propsFormik.setFieldValue(fieldType, text);
+    };
+
     return (
         <Formik
             onSubmit={values =>
@@ -58,7 +63,7 @@ const RegisterForm = props => {
                             tintColor="white"
                             fontSize={22}
                             labelFontSize={18}
-                            onChangeText={text => props.setFieldValue("login", text)}
+                            onChangeText={text => onChangeText(props, "login", text)}
                         />
                         <FormikInput
                             label="Email"
@@ -69,7 +74,7 @@ const RegisterForm = props => {
                             tintColor="white"
                             fontSize={22}
                             labelFontSize={18}
-                            onChangeText={text => props.setFieldValue("email", text)}
+                            onChangeText={text => onChangeText(props, "email", text)}
                         />
                         <FormikInput
                             label="Password"
@@ -80,7 +85,7 @@ const RegisterForm = props => {
                             tintColor="white"
                             fontSize={22}
                             labelFontSize={18}
-                            onChangeText={text => props.setFieldValue("password1", text)}
+                            onChangeText={text => onChangeText(props, "password1", text)}
                         />
                         <FormikInput
                             label="Сonfirm Password"
@@ -91,12 +96,19 @@ const RegisterForm = props => {
                             tintColor="white"
                             fontSize={22}
                             labelFontSize={18}
-                            onChangeText={text => props.setFieldValue("password2", text)}
+                            onChangeText={text => onChangeText(props, "password2", text)}
                         />
                         <View>
-                            {error && error.non_field_errors && (
-                                <Text>{error.non_field_errors[0]}</Text>
-                            )}
+                            {error && error.non_field_errors ? 
+                                <Text>{error.non_field_errors[0]}</Text> : 
+                                error && error.username ? 
+                                <Text>{error.username[0]}</Text> : 
+                                error && error.password ?
+                                <Text>{error.password[0]}</Text> :
+                                error && error.email ?
+                                <Text > {error.email[0]}</Text> :
+                                null
+                        }
                         </View>
                         <RaisedTextButton
                             style={styles.button}

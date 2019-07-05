@@ -10,10 +10,14 @@ import { setTokenToDB } from "../services/dataBase";
 function* registerAsync(formValues) {
   try {
     const response = yield call(registerRequest, formValues.values);
-    yield put(registerSuccess(response.data.user, response.data.token));
-    setTokenToDB(response?.data?.token);
+    if (response.status === 201) {
+      yield put(registerSuccess(response.data.user, response.data.token));
+      setTokenToDB(response?.data?.token);
+    } else {
+      throw response;
+    }
   } catch (error) {
-    yield put(registerError(error.response.data));
+    yield put(registerError(error.data));
   }
 }
 

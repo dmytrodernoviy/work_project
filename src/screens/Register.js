@@ -6,13 +6,15 @@ import Logo from "../assets/img/logo.png";
 import { height, width, DismissKeyboard } from "../utilites";
 import RegisterForm from "../components/RegisterForm";
 import { registerRequest } from "../action-creators/register";
+import { resetError } from "../action-creators/login";
 
 const mapStateToProps = state => ({
   errorRegister: state.authorization.errorRegister
 });
 
 const mapDispatchToProps = dispatch => ({
-  register: formValues => dispatch(registerRequest(formValues))
+  register: formValues => dispatch(registerRequest(formValues)),
+  resetError: () => dispatch(resetError())
 });
 
 class Register extends Component {
@@ -21,7 +23,7 @@ class Register extends Component {
         <DismissKeyboard>
           <View style={styles.container}>
                 <Image source={Logo} style={styles.logo} />
-                <RegisterForm registerSubmit={this.props.register} error={this.props.errorRegister} />
+                <RegisterForm registerSubmit={this.props.register} error={this.props.errorRegister} resetError={this.props.resetError}/>
                 <RaisedTextButton
                     style={styles.button}
                     title="to sign in"
@@ -31,7 +33,7 @@ class Register extends Component {
                     onPress={() => this.props.navigation.navigate("LoginScreen")}
                   />
               </View>
-        </DismissKeyboard>
+      </DismissKeyboard>
     );
   }
 }

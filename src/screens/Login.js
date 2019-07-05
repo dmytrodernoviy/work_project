@@ -5,21 +5,26 @@ import { connect } from "react-redux";
 import Logo from "../assets/img/logo.png";
 import LoginForm from "../components/LoginForm";
 import { height, width, DismissKeyboard } from "../utilites";
-import { loginRequest } from "../action-creators/login";
+import { loginRequest, resetError } from "../action-creators/login";
 
 const mapStateToProps = state => ({
   errorLogin: state.authorization.errorLogin
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: formValues => dispatch(loginRequest(formValues))
+  login: formValues => dispatch(loginRequest(formValues)),
+  resetError: () => dispatch(resetError())
 });
 
 const LoginScreen = props => (
   <DismissKeyboard>
     <View style={styles.container}>
       <Image source={Logo} style={styles.logo} />
-      <LoginForm loginSubmit={props.login} error={props.errorLogin} />
+      <LoginForm
+        loginSubmit={props.login}
+        error={props.errorLogin}
+        resetError={props.resetError}
+      />
       <RaisedTextButton
         style={styles.button}
         title="to sign up"

@@ -11,7 +11,7 @@ export default function products(state = initialState, action) {
     case types.PRODUCTS_LIST_REQUEST:
       return { ...state, loading: true };
     case types.PRODUCTS_LIST_SUCCESS:
-      return { ...state, loading: false, products: action.payload };
+      return { ...state, loading: false, products: action.data };
     case types.PRODUCTS_LIST_FAILURE:
       return { ...state, loading: false };
     default:

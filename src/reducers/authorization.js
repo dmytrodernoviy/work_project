@@ -1,6 +1,6 @@
 import * as typesLogin from "../action-creators/login";
 import * as typesRegister from "../action-creators/register";
-import { INIT_APP, GET_PROFILE } from "../action-creators/initApp";
+import { INIT_APP, GET_PROFILE, TOKEN_ERROR } from "../action-creators/initApp";
 
 const initialState = {
   loading: false,
@@ -24,7 +24,7 @@ export default function authorization(state = initialState, action) {
         errorRegister: null
       };
     case typesLogin.LOGIN_FAILURE:
-      return { ...state, loading: false, errorLogin: action.error };
+      return { ...state, loading: false, errorLogin: action.data };
     case typesRegister.REGISTER_REQUEST:
       return { ...state, loading: true };
     case typesRegister.REGISTER_SUCCESS:
@@ -37,11 +37,13 @@ export default function authorization(state = initialState, action) {
         errorRegister: null
       };
     case typesRegister.REGISTER_ERROR:
-      return { ...state, loading: false, errorRegister: action.error };
+      return { ...state, loading: false, errorRegister: action.data };
     case INIT_APP:
-      return { ...state, token: action.token };
+      return { ...state, token: action.data };
     case GET_PROFILE:
-      return { ...state, userData: action.payload };
+      return { ...state, userData: action.data };
+    case TOKEN_ERROR:
+      return { ...state, token: null };
     case typesLogin.LOGOUT:
       return { ...state, token: null };
     case typesLogin.RESET_LOGIN_ERROR:

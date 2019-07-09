@@ -19,7 +19,6 @@ function* productsList() {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function* watchProductsList() {
   yield takeEvery(PRODUCTS_LIST_REQUEST, productsList);
 }

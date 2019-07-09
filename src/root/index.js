@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AsyncStorage from "@react-native-community/async-storage";
+//import AsyncStorage from "@react-native-community/async-storage";
 import AuthorizationStack from "../navigation/AuthorizationStack";
 import AppStack from "../navigation/AppStack";
 import { init } from "../action-creators/initApp";
@@ -16,7 +16,7 @@ const mapDispatchToProps = {
 class RootContainer extends Component {
   componentWillMount() {
     //AsyncStorage.removeItem('token');
-    this.props.init()
+    this.props.init();
   }
 
   render() {

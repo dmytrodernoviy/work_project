@@ -12,7 +12,7 @@ function* registerAsync(formValues) {
     const response = yield call(registerRequest, formValues.values);
     if (response.status === 201) {
       yield put(registerSuccess(response.data.user, response.data.token));
-      setTokenToDB(response?.data?.token);
+      setTokenToDB(response.data.token);
     } else {
       throw response;
     }
@@ -21,7 +21,6 @@ function* registerAsync(formValues) {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function* watchRegister() {
   yield takeEvery(REGISTER_REQUEST, registerAsync);
 }

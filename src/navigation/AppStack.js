@@ -1,10 +1,10 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import Products from "../screens/Products";
 import transition from "./transition-config";
+import ProductsScreenContainer from "../containers/ProductsScreenContainer";
 
 const AppStack = createStackNavigator(
   {
-    Products: { screen: Products }
+    ProductsScreenContainer: { screen: ProductsScreenContainer }
   },
   {
     headerMode: "none",

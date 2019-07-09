@@ -1,12 +1,12 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import LoginScreen from "../screens/Login";
-import Register from "../screens/Register";
 import transition from "./transition-config";
+import LoginScreenContainer from "../containers/LoginScreenContainer";
+import RegisterScreenContainer from "../containers/RegisterScreenContainer";
 
 const AuthorizationStack = createStackNavigator(
   {
-    LoginScreen: { screen: LoginScreen },
-    Register: { screen: Register }
+    LoginScreenContainer: { screen: LoginScreenContainer },
+    RegisterScreenContainer: { screen: RegisterScreenContainer }
   },
   {
     headerMode: "none",

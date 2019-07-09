@@ -2,9 +2,9 @@ import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { height, width } from "../utilites";
-import defaultAvatar from "../assets/img/Avatar.png";
-import logoutIcon from "../assets/img/logout.png";
 import { setTokenToDB } from "../services/dataBase";
+import { images } from "../assets/images";
+import { colors } from "../consts/colors";
 
 const HeaderProductList = ({ logout, userData }) => {
   const logOut = () => {
@@ -16,12 +16,12 @@ const HeaderProductList = ({ logout, userData }) => {
     <View style={styles.container}>
       <View style={styles.wrap}>
         <View style={styles.user}>
-          <Image source={defaultAvatar} style={styles.avatar} />
+          <Image source={images.avatar} style={styles.avatar} />
           <Text style={styles.username}>{userData.username}</Text>
         </View>
         <TouchableOpacity onPress={() => logOut()}>
           <View>
-            <Image source={logoutIcon} style={styles.logout} />
+            <Image source={images.logout} style={styles.logout} />
           </View>
         </TouchableOpacity>
       </View>
@@ -32,7 +32,7 @@ const HeaderProductList = ({ logout, userData }) => {
 const styles = StyleSheet.create({
   container: {
     height: height * 0.12,
-    backgroundColor: "#34a5de",
+    backgroundColor: colors.mainColor,
     justifyContent: "flex-end",
     paddingBottom: height * 0.015,
     paddingLeft: width * 0.05

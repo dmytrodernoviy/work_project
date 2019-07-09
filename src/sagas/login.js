@@ -5,10 +5,10 @@ import { setTokenToDB } from "../services/dataBase";
 
 function* loginAsync(formValues) {
   try {
-    const response = yield call(loginRequest, formValues.values);
+    const response = yield call(loginRequest, formValues.data);
     if (response.status === 200) {
       yield put(loginSuccess(response.data.user, response.data.token));
-      setTokenToDB(response?.data?.token);
+      setTokenToDB(response.data.token);
     } else {
       throw response;
     }
@@ -17,7 +17,6 @@ function* loginAsync(formValues) {
   }
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function* watchLogin() {
   yield takeEvery("LOGIN_REQUEST", loginAsync);
 }

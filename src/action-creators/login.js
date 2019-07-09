@@ -4,17 +4,21 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGOUT = "LOGOUT";
 
-export const loginRequest = formValues => {
-  return { type: LOGIN_REQUEST, values: formValues };
-};
+export const loginRequest = data => ({
+  type: LOGIN_REQUEST,
+  data
+});
 
-export const loginSuccess = (userData, token) => {
-  return { type: LOGIN_SUCCESS, userData, token };
-};
+export const loginSuccess = (userData, token) => ({
+  type: LOGIN_SUCCESS,
+  userData,
+  token
+});
 
-export const loginFailure = error => {
-  return { type: LOGIN_FAILURE, error };
-};
+export const loginFailure = data => ({
+  type: LOGIN_FAILURE,
+  data
+});
 
 export const resetError = () => ({ type: RESET_LOGIN_ERROR });
 

@@ -8,6 +8,12 @@ export const setTokenToDB = async token => {
   } catch (error) {}
 };
 
+export const removeTokenFromDB = async token => {
+  try {
+    await AsyncStorage.removeItem(TOKEN, token);
+  } catch {}
+};
+
 export const setUserDataToDB = async userData => {
   try {
     const userValues = [

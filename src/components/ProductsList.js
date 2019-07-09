@@ -3,7 +3,6 @@ import { ScrollView } from "react-native";
 import ProductItem from "./ProductItem";
 
 const ProductList = ({ productItems }) => {
-  console.log(productItems);
   return (
     <ScrollView>
       {productItems.map(item => (

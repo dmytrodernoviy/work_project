@@ -1,9 +1,16 @@
 import { put, takeEvery, call } from "redux-saga/effects";
-import { getTokenFromDB, setUserDataToDB } from "../services/dataBase";
-import initAppAction, {
+import SplashScreen from "react-native-splash-screen";
+import {
+  getTokenFromDB,
+  setUserDataToDB,
+  removeTokenFromDB
+} from "../services/dataBase";
+import {
   INIT_SAGA,
   init,
-  getProfileAction
+  getProfileAction,
+  tokenError,
+  initAppAction
 } from "../action-creators/initApp";
 import { setTokenToHeaders, getProfile } from "../services/restAPI";
 
@@ -12,11 +19,18 @@ function* initApp() {
     yield call(init);
     const token = yield call(getTokenFromDB);
     if (token) {
-      yield put(initAppAction(token));
       setTokenToHeaders(token);
       const response = yield call(getProfile);
-      yield put(getProfileAction(response.data));
-      yield call(setUserDataToDB, response.data);
+      if (response.status === 401) {
+        yield call(tokenError);
+        yield call(removeTokenFromDB);
+        SplashScreen.hide();
+      } else {
+        yield put(initAppAction(token));
+        yield put(getProfileAction(response.data));
+        yield call(setUserDataToDB, response.data);
+        SplashScreen.hide();
+      }
     }
   } catch (error) {}
 }

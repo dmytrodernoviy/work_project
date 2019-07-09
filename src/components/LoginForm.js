@@ -1,21 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import { RaisedTextButton } from "react-native-material-buttons";
-import { compose } from "recompose";
-import {
-  handleTextInput,
-  withNextInputAutoFocusForm,
-  withNextInputAutoFocusInput
-} from "react-native-formik";
+import { withNextInputAutoFocusForm } from "react-native-formik";
 import { Formik } from "formik";
-import { TextField } from "react-native-material-textfield";
 import * as Yup from "yup";
 import { width, height } from "../utilites";
+import CustomField from "./CustomField";
+import AuthorizationButton from "./AuthorizationButton";
 
-const FormikInput = compose(
-  handleTextInput,
-  withNextInputAutoFocusInput
-)(TextField);
 const InputsContainer = withNextInputAutoFocusForm(View);
 
 const validationSchema = Yup.object().shape({
@@ -27,8 +18,7 @@ const validationSchema = Yup.object().shape({
     .min(8, "Min length is 8 characters")
 });
 
-const LoginForm = props => {
-  const { error, resetError } = props;
+const LoginForm = ({ error, resetError, loginSubmit }) => {
   const onChangeText = (propsFormik, fieldType, text) => {
     resetError();
     propsFormik.setFieldValue(fieldType, text);
@@ -37,33 +27,23 @@ const LoginForm = props => {
   return (
     <Formik
       onSubmit={values =>
-        props.loginSubmit({ email: values.email, password: values.password })
+        loginSubmit({ email: values.email, password: values.password })
       }
       validationSchema={validationSchema}
     >
       {props => {
         return (
           <InputsContainer style={styles.form}>
-            <FormikInput
+            <CustomField
               label="Email"
               name="email"
               type="email"
-              baseColor="white"
-              textColor="white"
-              tintColor="white"
-              fontSize={22}
-              labelFontSize={18}
               onChangeText={text => onChangeText(props, "email", text)}
             />
-            <FormikInput
+            <CustomField
               label="Password"
               name="password"
               type="password"
-              baseColor="white"
-              textColor="white"
-              tintColor="white"
-              fontSize={22}
-              labelFontSize={18}
               onChangeText={text => onChangeText(props, "password", text)}
             />
             <View>
@@ -71,13 +51,10 @@ const LoginForm = props => {
                 <Text>{error.non_field_errors[0]}</Text>
               )}
             </View>
-            <RaisedTextButton
+            <AuthorizationButton
               style={styles.button}
               onPress={props.handleSubmit}
               title="sign in"
-              color="white"
-              titleColor="black"
-              titleStyle={{ fontSize: 20 }}
             />
           </InputsContainer>
         );

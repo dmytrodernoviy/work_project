@@ -1,29 +1,21 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { RaisedTextButton } from "react-native-material-buttons";
-import { connect } from "react-redux";
-import Logo from "../assets/img/logo.png";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 import LoginForm from "../components/LoginForm";
-import { height, width, DismissKeyboard } from "../utilites";
-import { loginRequest, resetError } from "../action-creators/login";
+import { height, width } from "../utilites";
+import { DismissKeyboard } from "../components/DismissKeyboard";
+import { images } from "../assets/images";
+import { colors } from "../consts/colors";
 
-const mapStateToProps = state => ({
-  errorLogin: state.authorization.errorLogin
-});
-
-const mapDispatchToProps = dispatch => ({
-  login: formValues => dispatch(loginRequest(formValues)),
-  resetError: () => dispatch(resetError())
-});
-
-const LoginScreen = props => (
+const LoginScreen = ({ loginSubmit, error, resetError, navigation }) => (
   <DismissKeyboard>
     <View style={styles.container}>
-      <Image source={Logo} style={styles.logo} />
+      <Image source={images.logo} style={styles.logo} />
       <LoginForm
-        loginSubmit={props.login}
-        error={props.errorLogin}
-        resetError={props.resetError}
+        loginSubmit={loginSubmit}
+        error={error}
+        resetError={resetError}
       />
       <RaisedTextButton
         style={styles.button}
@@ -31,8 +23,9 @@ const LoginScreen = props => (
         color="grey"
         titleColor="black"
         titleStyle={{ fontSize: 20 }}
-        onPress={() => props.navigation.navigate("Register")}
+        onPress={() => navigation.navigate("RegisterScreenContainer")}
       />
+      <KeyboardSpacer />
     </View>
   </DismissKeyboard>
 );
@@ -41,7 +34,7 @@ const styles = StyleSheet.create({
   container: {
     height: height * 1,
     width: width * 1,
-    backgroundColor: "#34a5de",
+    backgroundColor: colors.mainColor,
     alignItems: "center",
     paddingTop: height * 0.06,
     paddingBottom: height * 0.1
@@ -55,7 +48,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginScreen);
+export default LoginScreen;

@@ -1,4 +1,4 @@
-import avatar from "./img/avatar.png";
+import avatar from "./img/Avatar.png";
 import img_item from "./img/img_item.jpg";
 import logo from "./img/logo.png";
 import logout from "./img/logout.png";

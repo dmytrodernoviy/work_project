@@ -20,7 +20,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.24197540348235946" green="0.6980566323314682" blue="0.96583549222797926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.24407878518104553" green="0.6943933367729187" blue="0.95923823118209839" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.24197540349999999" green="0.69805663230000004" blue="0.96583549219999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
             <nil key="simulatedStatusBarMetrics"/>

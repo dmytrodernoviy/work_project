@@ -31,6 +31,8 @@ function* initApp() {
         yield call(setUserDataToDB, response.data);
         SplashScreen.hide();
       }
+    } else {
+      SplashScreen.hide();
     }
   } catch (error) {}
 }

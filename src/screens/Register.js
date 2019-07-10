@@ -14,12 +14,7 @@ import RegisterForm from "../components/RegisterForm";
 import { DismissKeyboard } from "../components/DismissKeyboard";
 import { colors } from "../consts/colors";
 
-const Register = ({
-  registerSubmit,
-  errorRegister,
-  resetError,
-  navigation
-}) => (
+const Register = ({ registerSubmit, error, resetError, navigation }) => (
   <KeyboardAvoidingView
     behavior={Platform.OS === "ios" ? "padding" : null}
     style={{ flex: 1 }}
@@ -30,7 +25,7 @@ const Register = ({
           <Image source={Logo} style={styles.logo} />
           <RegisterForm
             registerSubmit={registerSubmit}
-            errorRegister={errorRegister}
+            error={error}
             resetError={resetError}
           />
           <RaisedTextButton

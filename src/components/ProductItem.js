@@ -4,23 +4,28 @@ import { width, height } from "../utilites";
 import { images } from "../assets/images";
 import { colors } from "../consts/colors";
 
-const ProductItem = ({ item }) => (
-  <View style={styles.container}>
-    <Image source={images.img_item} style={styles.imgItem} />
-    <View style={styles.barItem}>
-      <TouchableOpacity>
-        <Text style={styles.itemName}>{item.theme}</Text>
-      </TouchableOpacity>
+const ProductItem = ({ item, navigation }) => {
+  const loadProductDetail = () =>
+    navigation.navigate("ProductDetailsScreenContainer");
 
-      <TouchableOpacity>
-        <Image
-          source={item.images.length === 0 ? images.show : item.images[0]}
-          style={styles.showIcon}
-        />
-      </TouchableOpacity>
+  return (
+    <View style={styles.container}>
+      <Image source={images.img_item} style={styles.imgItem} />
+      <View style={styles.barItem}>
+        <TouchableOpacity>
+          <Text style={styles.itemName}>{item.theme}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => loadProductDetail()}>
+          <Image
+            source={item.images.length === 0 ? images.show : item.images[0]}
+            style={styles.showIcon}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

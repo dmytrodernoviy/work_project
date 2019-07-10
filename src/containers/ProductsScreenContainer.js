@@ -21,13 +21,14 @@ class ProductsScreenContainer extends Component {
   }
 
   render() {
-    const { products, loading, userData, logout } = this.props;
+    const { products, loading, userData, logout, navigation } = this.props;
     return (
       <Products
         products={products}
         loading={loading}
         userData={userData}
         logout={logout}
+        navigation={navigation}
       />
     );
   }

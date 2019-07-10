@@ -20,7 +20,7 @@ const RegisterScreenContainer = ({
   navigation
 }) => (
   <Register
-    errorRegister={errorRegister}
+    error={errorRegister}
     registerSubmit={registerSubmit}
     resetError={resetErr}
     navigation={navigation}
